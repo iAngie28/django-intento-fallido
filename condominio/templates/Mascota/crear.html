@@ -1,0 +1,19 @@
+
+<!doctype html>
+<html><body>
+  <div style=" display: flex; gap:20px;">
+    <h1>Crear Mascota</h1>
+        <a href="{% url 'list_mascota' %}"
+            style="background:#3498db; color:white; padding:4px 3px; border-radius:4px; text-decoration:none; height: 20px;">
+            Volver
+        </a>
+    </div>
+  
+  <form  method="post">{% csrf_token %}
+
+    {{form.as_p}}
+
+    <button>Guardar</button>
+  </form>
+  
+</body></html>

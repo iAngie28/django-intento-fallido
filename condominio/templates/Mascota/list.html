@@ -1,0 +1,45 @@
+
+<div style=" display: flex; gap:20px;">
+<h1>Mascotas</h1>
+<a href="{% url 'create_mascota'%}"
+    style="background:#3498db; color:white; padding:4px 3px; border-radius:4px; text-decoration:none; height: 20px;">
+    Crear
+</a>
+</div>
+<table border="1" cellspacing="0" cellpadding="5">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Raza</th>
+            <th>Casa</th>
+            <th>Accion</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for mascota in mascotas %}
+        <tr>
+            <td>{{ mascota.id }}</td>
+            <td>{{ mascota.nombre }}</td>
+            <td>{{ mascota.raza }}</td>
+            <td>{{ mascota.casa.codigo }}</td>
+            <td>
+                <div style="margin-top:12px; display: flex; justify-content: space-between;  gap:10px;">
+                    <a href="{% url 'show_mascota' mascota.id %}"
+                        style="background:#3498db; color:white; padding:4px 3px; border-radius:4px; text-decoration:none;height: 20px;">
+                        Editar
+                    </a>
+                    <form action="{% url 'eliminar_mascota' pk=mascota.id %}" method="post">{% csrf_token %}
+                        <button
+                            style="background:#3498db; color:white; padding:4px 3px; border-radius:4px; text-decoration:none;">Eliminar</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">No hay mascotas registradas.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
